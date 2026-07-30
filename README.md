@@ -242,3 +242,7 @@ python export.py --checkpoint checkpoints/best_model.pt --format openvino \
 5. Có thêm data mới hoặc muốn cải thiện thêm? Dùng `tune.py` để train tiếp
    (fine-tune) từ checkpoint đã có, thay vì train lại từ đầu.
 6. `export.py` để xuất model sang ONNX/OpenVINO khi cần triển khai thực tế.
+
+## 10. Kết quả chạy thử sau khi train
+
+![Kết quả chạy thử OCR biển số](test/result_test.jpg)
