@@ -63,7 +63,7 @@ def generate_split(
             image_name = f"plate_{i:05d}.jpg"
             image.save(images_dir / image_name, quality=90)
 
-            f.write(f"images/{image_name}\t{plate_text}\n")
+            f.write(f"{image_name}\t{plate_text}\n")
 
     print(f"Đã tạo {num_samples} ảnh giả lập tại: {output_dir}")
 

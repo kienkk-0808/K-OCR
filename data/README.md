@@ -12,12 +12,12 @@ data/
 
 ## Định dạng `labels.txt`
 
-Mỗi dòng: đường dẫn ảnh (tương đối so với thư mục chứa `labels.txt`), theo sau
+Mỗi dòng: tên ảnh, theo sau
 là ký tự **Tab**, rồi đến biển số dạng chữ:
 
 ```
-images/plate_00001.jpg	29A-12345
-images/plate_00002.jpg	30F-123.45
+plate_00001.jpg	29A-12345
+plate_00002.jpg	30F-123.45
 ```
 
 - Ký tự cho phép: `0-9`, `A-Z` (viết hoa), `-`, `.` (xem `charset.py`).

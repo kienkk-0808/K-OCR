@@ -48,10 +48,12 @@ def build_transforms(train: bool) -> transforms.Compose:
 class PlateDataset(Dataset):
     """
     Đọc dữ liệu từ file nhãn dạng:
-        <đường_dẫn_ảnh>\t<biển_số>
+        <tên_file_ảnh>\t<biển_số>
 
-    Đường dẫn ảnh trong file nhãn là tương đối so với thư mục chứa
-    chính file nhãn đó (xem data/README.md).
+    Hoặc:
+        <tên_file_ảnh> <biển_số>
+
+    Ảnh được tìm trong cùng thư mục với file nhãn.
     """
 
     def __init__(self, labels_path: str | Path, train: bool) -> None:
@@ -63,19 +65,33 @@ class PlateDataset(Dataset):
         self.transform = build_transforms(train)
 
         self.samples: list[tuple[Path, str]] = []
+
         with self.labels_path.open("r", encoding="utf-8") as f:
             for line_num, line in enumerate(f, start=1):
                 line = line.strip()
                 if not line:
                     continue
-                parts = line.split("\t")
+
+                # Ưu tiên tab, nếu không có thì tách bằng whitespace.
+                if "\t" in line:
+                    parts = line.split("\t", maxsplit=1)
+                else:
+                    parts = line.split(maxsplit=1)
+
                 if len(parts) != 2:
                     raise ValueError(
                         f"{self.labels_path}:{line_num} sai định dạng, "
-                        f"cần '<đường_dẫn_ảnh>\\t<biển_số>', nhận được: {line!r}"
+                        f"cần '<tên_file_ảnh>\\t<biển_số>' hoặc "
+                        f"'<tên_file_ảnh> <biển_số>', nhận được: {line!r}"
                     )
-                image_rel_path, plate_text = parts
-                self.samples.append((self.root_dir / image_rel_path, plate_text))
+
+                image_name, plate_text = parts
+                image_name = image_name.strip()
+                plate_text = plate_text.strip()
+
+                self.samples.append(
+                    (self.root_dir / image_name, plate_text)
+                )
 
         if not self.samples:
             raise ValueError(f"File nhãn rỗng: {self.labels_path}")
