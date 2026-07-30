@@ -90,7 +90,7 @@ class PlateDataset(Dataset):
                 plate_text = plate_text.strip()
 
                 self.samples.append(
-                    (self.root_dir / image_name, plate_text)
+                    (self.root_dir / "images" / image_name, plate_text)
                 )
 
         if not self.samples:
