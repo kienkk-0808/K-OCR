@@ -245,4 +245,6 @@ python export.py --checkpoint checkpoints/best_model.pt --format openvino \
 
 ## 10. Kết quả chạy thử sau khi train
 
+
+- Cấu hình chạy thử: i3-8100U CPU
 ![Kết quả chạy thử OCR biển số](test/result_test.jpg)
