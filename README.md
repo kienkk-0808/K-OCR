@@ -247,4 +247,5 @@ python export.py --checkpoint checkpoints/best_model.pt --format openvino \
 
 
 - Cấu hình chạy thử: i3-8100U CPU
+(Nếu export qua OpenVINO thời gian chạy sẽ ít hơn)
 ![Kết quả chạy thử OCR biển số](test/result_test.jpg)
